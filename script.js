@@ -157,9 +157,9 @@ contactForm.addEventListener('submit', (e) => {
         errorMessages.push('Mensagem deve ter pelo menos 10 caracteres');
     }
     
-    if (isValid) {
-// Número do seu WhatsApp (com código do país + DDD, sem espaços)
-    const seuNumero = "5547999104588"; // Coloque seu número aqui
+if (isValid) {
+    // Número do seu WhatsApp (com código do país + DDD, sem espaços)
+    const seuNumero = "5547999104588";
     
     // Monta a mensagem formatada para o WhatsApp
     const texto = `Olá! Meu nome é *${name}*.%0A%0A` +
@@ -179,8 +179,7 @@ contactForm.addEventListener('submit', (e) => {
     // Show error messages
     showNotification(errorMessages.join(', '), 'error');
 }
-
-});
+});  // <-- Fecha o addEventListener do contactForm
 
 // ===================================
 // Notification System

@@ -158,16 +158,28 @@ contactForm.addEventListener('submit', (e) => {
     }
     
     if (isValid) {
-        // Form is valid - show success message
-        showNotification('Mensagem enviada com sucesso! Entraremos em contato em breve.', 'success');
-        contactForm.reset();
-        
-        // In a real application, you would send the form data to a server
-        console.log('Form Data:', { name, email, phone, message });
-    } else {
-        // Show error messages
-        showNotification(errorMessages.join(', '), 'error');
-    }
+// Número do seu WhatsApp (com código do país + DDD, sem espaços)
+    const seuNumero = "5547999104588"; // Coloque seu número aqui
+    
+    // Monta a mensagem formatada para o WhatsApp
+    const texto = `Olá! Meu nome é *${name}*.%0A%0A` +
+                  `📧 *E-mail:* ${email}%0A` +
+                  `📱 *Telefone:* ${phone}%0A%0A` +
+                  `💬 *Mensagem:*%0A${message}`;
+    
+    // Cria o link do WhatsApp
+    const urlWhatsApp = `https://wa.me/${seuNumero}?text=${texto}`;
+    
+    // Abre em uma nova aba
+    window.open(urlWhatsApp, '_blank');
+    
+    showNotification('Redirecionando para o WhatsApp...', 'success');
+    contactForm.reset();
+} else {
+    // Show error messages
+    showNotification(errorMessages.join(', '), 'error');
+}
+
 });
 
 // ===================================

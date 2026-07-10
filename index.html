@@ -6,16 +6,62 @@
     <meta name="description" content="CMP Market - Mini mercado inteligente 24h para condomínios. Praticidade, tecnologia e conveniência ao seu alcance.">
     <meta name="keywords" content="mini mercado, fast market, condomínio, mercado autônomo, conveniência 24h">
     <meta name="author" content="CMP Market">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0A2540">
     <title>CMP Market — Praticidade 24h no seu condomínio</title>
-    
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://cmpmarket.com.br/">
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+    <!-- Open Graph / Facebook / WhatsApp preview -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:url" content="https://cmpmarket.com.br/">
+    <meta property="og:site_name" content="CMP Market">
+    <meta property="og:title" content="CMP Market — Praticidade 24h no seu condomínio">
+    <meta property="og:description" content="Mini mercado inteligente 24h para condomínios. Praticidade, tecnologia e conveniência ao seu alcance.">
+    <meta property="og:image" content="https://cmpmarket.com.br/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Interior do CMP Market, mini mercado autônomo">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="CMP Market — Praticidade 24h no seu condomínio">
+    <meta name="twitter:description" content="Mini mercado inteligente 24h para condomínios. Praticidade, tecnologia e conveniência ao seu alcance.">
+    <meta name="twitter:image" content="https://cmpmarket.com.br/og-image.jpg">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "CMP Market",
+        "url": "https://cmpmarket.com.br/",
+        "logo": "https://cmpmarket.com.br/images/logo.png",
+        "description": "Mini mercado inteligente e autônomo 24h para condomínios residenciais e comerciais.",
+        "email": "contato@cmpmarket.com.br",
+        "telephone": "+55-47-99166-3273",
+        "sameAs": [
+            "https://www.instagram.com/cmpmarket_oficial/"
+        ]
+    }
+    </script>
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
+
     <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
@@ -24,7 +70,7 @@
     <nav id="navbar" class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <img src="images/logo.webp" alt="CMP Market Logo">
+                <img src="images/logo.png" alt="CMP Market Logo" width="221" height="160">
                 <span>CMP Market</span>
             </div>
             <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
@@ -40,6 +86,11 @@
                 <li><a href="#products" class="nav-link">Produtos</a></li>
                 <li><a href="#gallery" class="nav-link">Galeria</a></li>
                 <li><a href="#contact" class="nav-link">Contato</a></li>
+                <li>
+                    <a href="https://www.instagram.com/cmpmarket_oficial/" target="_blank" rel="noopener noreferrer" class="nav-instagram" aria-label="Siga o CMP Market no Instagram" title="Siga no Instagram">
+                        <i class="fab fa-instagram" aria-hidden="true"></i>
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -47,23 +98,35 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <!-- Hero Video Background -->
-        <video class="hero-video" autoplay muted loop playsinline>
-            <source src="images/hero-video.mp4" type="video/mp4">
+        <video class="hero-video" muted loop playsinline preload="none" poster="images/hero-poster.jpg">
+            <source data-src="images/hero-video.mp4" type="video/mp4">
         </video>
-        <!-- Fallback Background Image -->
+        <!-- Fallback Background Image (shown on mobile instead of the video, and if video fails) -->
         <div class="hero-fallback"></div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <h1 class="hero-title">CMP Market</h1>
             <p class="hero-subtitle">Praticidade e conveniência <span class="highlight">24h</span> no seu condomínio</p>
             <p class="hero-description">O futuro do varejo inteligente chegou. Mini mercado autônomo com tecnologia de ponta para facilitar sua vida.</p>
-            <a href="#about" class="btn btn-primary">
-                <span>Conheça o CMP Market</span>
-                <i class="fas fa-arrow-right"></i>
-            </a>
+            <ul class="hero-chips">
+                <li><i class="fas fa-clock" aria-hidden="true"></i> Aberto 24h</li>
+                <li><i class="fas fa-shield-alt" aria-hidden="true"></i> Ambiente seguro</li>
+                <li><i class="fas fa-users-slash" aria-hidden="true"></i> Sem filas</li>
+                <li><i class="fas fa-qrcode" aria-hidden="true"></i> App, cartão ou Pix</li>
+            </ul>
+            <div class="hero-actions">
+                <a href="#about" class="btn btn-primary">
+                    <span>Conheça o CMP Market</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </a>
+                <a href="https://wa.me/5547991663273" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+                    <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                    <span>Falar no WhatsApp</span>
+                </a>
+            </div>
         </div>
         <div class="hero-scroll">
-            <i class="fas fa-chevron-down"></i>
+            <i class="fas fa-chevron-down" aria-hidden="true"></i>
         </div>
     </section>
 
@@ -82,24 +145,24 @@
                     <p>Nossa solução elimina filas, oferece produtos frescos e variados, e está localizada estrategicamente dentro do seu condomínio — tudo isso com total autonomia e conveniência.</p>
                     <div class="about-stats">
                         <div class="stat-item">
-                            <i class="fas fa-clock"></i>
+                            <i class="fas fa-clock" aria-hidden="true"></i>
                             <h4>24/7</h4>
                             <p>Disponível sempre</p>
                         </div>
                         <div class="stat-item">
-                            <i class="fas fa-shield-alt"></i>
+                            <i class="fas fa-shield-alt" aria-hidden="true"></i>
                             <h4>100%</h4>
                             <p>Seguro</p>
                         </div>
                         <div class="stat-item">
-                            <i class="fas fa-rocket"></i>
+                            <i class="fas fa-rocket" aria-hidden="true"></i>
                             <h4>Tech</h4>
                             <p>Inteligente</p>
                         </div>
                     </div>
                 </div>
                 <div class="about-image">
-                    <img src="images/gallery-6.jpg" alt="CMP Market - Interior moderno">
+                    <img src="images/about-photo.jpg" alt="Unidade CMP Market instalada em ambiente de condomínio" width="900" height="1200" loading="lazy">
                 </div>
             </div>
         </div>
@@ -115,7 +178,7 @@
             <div class="steps-grid">
                 <div class="step-card">
                     <div class="step-icon">
-                        <i class="fas fa-door-open"></i>
+                        <i class="fas fa-door-open" aria-hidden="true"></i>
                     </div>
                     <div class="step-number">01</div>
                     <h3>Entre</h3>
@@ -123,7 +186,7 @@
                 </div>
                 <div class="step-card">
                     <div class="step-icon">
-                        <i class="fas fa-shopping-basket"></i>
+                        <i class="fas fa-shopping-basket" aria-hidden="true"></i>
                     </div>
                     <div class="step-number">02</div>
                     <h3>Escolha</h3>
@@ -131,7 +194,7 @@
                 </div>
                 <div class="step-card">
                     <div class="step-icon">
-                        <i class="fas fa-credit-card"></i>
+                        <i class="fas fa-credit-card" aria-hidden="true"></i>
                     </div>
                     <div class="step-number">03</div>
                     <h3>Pague</h3>
@@ -139,7 +202,7 @@
                 </div>
                 <div class="step-card">
                     <div class="step-icon">
-                        <i class="fas fa-thumbs-up"></i>
+                        <i class="fas fa-thumbs-up" aria-hidden="true"></i>
                     </div>
                     <div class="step-number">04</div>
                     <h3>Aproveite</h3>
@@ -159,42 +222,42 @@
             <div class="benefits-grid">
                 <div class="benefit-card">
                     <div class="benefit-icon">
-                        <i class="fas fa-clock"></i>
+                        <i class="fas fa-clock" aria-hidden="true"></i>
                     </div>
                     <h3>Economia de Tempo</h3>
                     <p>Não perca tempo em deslocamentos. Tudo o que você precisa a poucos passos de casa.</p>
                 </div>
                 <div class="benefit-card">
                     <div class="benefit-icon">
-                        <i class="fas fa-moon"></i>
+                        <i class="fas fa-moon" aria-hidden="true"></i>
                     </div>
                     <h3>Funcionamento 24h</h3>
                     <p>Disponível a qualquer hora do dia ou da noite, todos os dias da semana.</p>
                 </div>
                 <div class="benefit-card">
                     <div class="benefit-icon">
-                        <i class="fas fa-home"></i>
+                        <i class="fas fa-home" aria-hidden="true"></i>
                     </div>
                     <h3>Comodidade no Condomínio</h3>
                     <p>Localizado estrategicamente dentro do seu condomínio para máxima conveniência.</p>
                 </div>
                 <div class="benefit-card">
                     <div class="benefit-icon">
-                        <i class="fas fa-microchip"></i>
+                        <i class="fas fa-microchip" aria-hidden="true"></i>
                     </div>
                     <h3>Tecnologia e Segurança</h3>
                     <p>Sistema inteligente com câmeras, sensores e controle de acesso avançado.</p>
                 </div>
                 <div class="benefit-card">
                     <div class="benefit-icon">
-                        <i class="fas fa-leaf"></i>
+                        <i class="fas fa-leaf" aria-hidden="true"></i>
                     </div>
                     <h3>Produtos Frescos</h3>
                     <p>Seleção variada de produtos frescos, bebidas geladas e itens de primeira necessidade.</p>
                 </div>
                 <div class="benefit-card">
                     <div class="benefit-icon">
-                        <i class="fas fa-users-slash"></i>
+                        <i class="fas fa-users-slash" aria-hidden="true"></i>
                     </div>
                     <h3>Sem Filas</h3>
                     <p>Sistema de self-checkout automático elimina filas e agiliza suas compras.</p>
@@ -214,64 +277,64 @@
                 <!-- Bebidas -->
                 <div class="product-card">
                     <div class="product-icon">
-                        <i class="fas fa-glass-water"></i>
+                        <i class="fas fa-glass-water" aria-hidden="true"></i>
                     </div>
                     <h3>Bebidas</h3>
                     <ul class="product-list">
-                        <li><i class="fas fa-check-circle"></i> Água mineral</li>
-                        <li><i class="fas fa-check-circle"></i> Refrigerantes</li>
-                        <li><i class="fas fa-check-circle"></i> Sucos naturais</li>
-                        <li><i class="fas fa-check-circle"></i> Energéticos</li>
-                        <li><i class="fas fa-check-circle"></i> Cervejas</li>
-                        <li><i class="fas fa-check-circle"></i> Vinhos</li>
+                        <li><i class="fas fa-check-circle" aria-hidden="true"></i> Água mineral</li>
+                        <li><i class="fas fa-check-circle" aria-hidden="true"></i> Refrigerantes</li>
+                        <li><i class="fas fa-check-circle" aria-hidden="true"></i> Sucos naturais</li>
+                        <li><i class="fas fa-check-circle" aria-hidden="true"></i> Energéticos</li>
+                        <li><i class="fas fa-check-circle" aria-hidden="true"></i> Cervejas</li>
+                        <li><i class="fas fa-check-circle" aria-hidden="true"></i> Vinhos</li>
                     </ul>
                 </div>
 
                 <!-- Snacks e Lanches -->
                 <div class="product-card">
                     <div class="product-icon">
-                        <i class="fas fa-cookie-bite"></i>
+                        <i class="fas fa-cookie-bite" aria-hidden="true"></i>
                     </div>
                     <h3>Snacks e Lanches</h3>
                     <ul class="product-list">
-                        <li><i class="fas fa-check-circle"></i> Salgadinhos</li>
-                        <li><i class="fas fa-check-circle"></i> Chocolates</li>
-                        <li><i class="fas fa-check-circle"></i> Biscoitos</li>
-                        <li><i class="fas fa-check-circle"></i> Barras de cereal</li>
-                        <li><i class="fas fa-check-circle"></i> Pipoca</li>
-                        <li><i class="fas fa-check-circle"></i> Doces</li>
+                        <li><i class="fas fa-check-circle" aria-hidden="true"></i> Salgadinhos</li>
+                        <li><i class="fas fa-check-circle" aria-hidden="true"></i> Chocolates</li>
+                        <li><i class="fas fa-check-circle" aria-hidden="true"></i> Biscoitos</li>
+                        <li><i class="fas fa-check-circle" aria-hidden="true"></i> Barras de cereal</li>
+                        <li><i class="fas fa-check-circle" aria-hidden="true"></i> Pipoca</li>
+                        <li><i class="fas fa-check-circle" aria-hidden="true"></i> Doces</li>
                     </ul>
                 </div>
 
                 <!-- Higiene e Limpeza -->
                 <div class="product-card">
                     <div class="product-icon">
-                        <i class="fas fa-pump-soap"></i>
+                        <i class="fas fa-pump-soap" aria-hidden="true"></i>
                     </div>
                     <h3>Higiene e Limpeza</h3>
                     <ul class="product-list">
-                        <li><i class="fas fa-check-circle"></i> Papel higiênico</li>
-                        <li><i class="fas fa-check-circle"></i> Sabonete</li>
-                        <li><i class="fas fa-check-circle"></i> Pasta de dente</li>
-                        <li><i class="fas fa-check-circle"></i> Shampoo</li>
-                        <li><i class="fas fa-check-circle"></i> Detergente</li>
-                        <li><i class="fas fa-check-circle"></i> Álcool gel</li>
+                        <li><i class="fas fa-check-circle" aria-hidden="true"></i> Papel higiênico</li>
+                        <li><i class="fas fa-check-circle" aria-hidden="true"></i> Sabonete</li>
+                        <li><i class="fas fa-check-circle" aria-hidden="true"></i> Pasta de dente</li>
+                        <li><i class="fas fa-check-circle" aria-hidden="true"></i> Shampoo</li>
+                        <li><i class="fas fa-check-circle" aria-hidden="true"></i> Detergente</li>
+                        <li><i class="fas fa-check-circle" aria-hidden="true"></i> Álcool gel</li>
                     </ul>
                 </div>
 
                 <!-- Conveniência -->
                 <div class="product-card">
                     <div class="product-icon">
-                        <i class="fas fa-mug-hot"></i>
+                        <i class="fas fa-mug-hot" aria-hidden="true"></i>
                     </div>
                     <h3>Conveniência</h3>
                     <ul class="product-list">
-                        <li><i class="fas fa-check-circle"></i> Pão de forma</li>
-                        <li><i class="fas fa-check-circle"></i> Leite</li>
-                        <li><i class="fas fa-check-circle"></i> Ovos</li>
-                        <li><i class="fas fa-check-circle"></i> Café</li>
-                        <li><i class="fas fa-check-circle"></i> Açúcar</li>
-                        <li><i class="fas fa-check-circle"></i> Manteiga</li>
+                        <li><i class="fas fa-check-circle" aria-hidden="true"></i> Pão de forma</li>
+                        <li><i class="fas fa-check-circle" aria-hidden="true"></i> Leite</li>
+                        <li><i class="fas fa-check-circle" aria-hidden="true"></i> Ovos</li>
+                        <li><i class="fas fa-check-circle" aria-hidden="true"></i> Café</li>
+                        <li><i class="fas fa-check-circle" aria-hidden="true"></i> Açúcar</li>
+                        <li><i class="fas fa-check-circle" aria-hidden="true"></i> Manteiga</li>
                     </ul>
                 </div>
             </div>
@@ -286,45 +349,96 @@
                 <p class="section-subtitle">Conheça nossos espaços e tecnologia</p>
             </div>
             <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="images/case1.JPEG" alt="Mini mercado autônomo">
+                <button type="button" class="gallery-item" aria-label="Ampliar foto: Ambiente Personalizado">
+                    <img src="images/gallery-mural.jpg" alt="Unidade CMP Market com mural personalizado na parede" width="506" height="900" loading="lazy">
                     <div class="gallery-overlay">
-                        <h4>Espaço Moderno</h4>
+                        <h4>Ambiente Personalizado</h4>
+                        <span class="gallery-zoom-icon" aria-hidden="true"><i class="fas fa-magnifying-glass-plus"></i></span>
                     </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="images/casec.jpg" alt="Interior do CMP Market">
+                </button>
+                <button type="button" class="gallery-item" aria-label="Ampliar foto: Design Vibrante">
+                    <img src="images/gallery-orange-wall.jpg" alt="Unidade CMP Market com parede laranja e prateleiras organizadas" width="675" height="900" loading="lazy">
                     <div class="gallery-overlay">
-                        <h4>Praticidade</h4>
+                        <h4>Design Vibrante</h4>
+                        <span class="gallery-zoom-icon" aria-hidden="true"><i class="fas fa-magnifying-glass-plus"></i></span>
                     </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="images/case3.JPEG" alt="Tecnologia de varejo">
+                </button>
+                <button type="button" class="gallery-item" aria-label="Ampliar foto: Produtos Refrigerados">
+                    <img src="images/gallery-refrigerados.jpg" alt="Sala de produtos refrigerados do CMP Market" width="675" height="900" loading="lazy">
                     <div class="gallery-overlay">
-                        <h4>Tecnologia Avançada</h4>
+                        <h4>Produtos Refrigerados</h4>
+                        <span class="gallery-zoom-icon" aria-hidden="true"><i class="fas fa-magnifying-glass-plus"></i></span>
                     </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="images/totem.png" alt="Sistema de self-checkout">
+                </button>
+                <button type="button" class="gallery-item" aria-label="Ampliar foto: Ambiente Moderno">
+                    <img src="images/gallery-neon.jpg" alt="Unidade CMP Market com iluminação neon e acabamento moderno" width="675" height="900" loading="lazy">
                     <div class="gallery-overlay">
-                        <h4>Totem Autoatendimento</h4>
+                        <h4>Ambiente Moderno</h4>
+                        <span class="gallery-zoom-icon" aria-hidden="true"><i class="fas fa-magnifying-glass-plus"></i></span>
                     </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="images/case4.JPEG" alt="Produtos frescos">
+                </button>
+                <button type="button" class="gallery-item" aria-label="Ampliar foto: Espaço para Consumo">
+                    <img src="images/gallery-mesa.jpg" alt="Área com mesas para consumo no local no CMP Market" width="675" height="900" loading="lazy">
                     <div class="gallery-overlay">
-                        <h4>Modernidade</h4>
+                        <h4>Espaço para Consumo</h4>
+                        <span class="gallery-zoom-icon" aria-hidden="true"><i class="fas fa-magnifying-glass-plus"></i></span>
                     </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="images/gallery-6.jpg" alt="Varejo autônomo">
+                </button>
+                <button type="button" class="gallery-item" aria-label="Ampliar foto: Área Externa">
+                    <img src="images/gallery-varanda.jpg" alt="Área externa e varanda de condomínio com unidade CMP Market" width="675" height="900" loading="lazy">
                     <div class="gallery-overlay">
-                        <h4>Varejo Autônomo</h4>
+                        <h4>Área Externa</h4>
+                        <span class="gallery-zoom-icon" aria-hidden="true"><i class="fas fa-magnifying-glass-plus"></i></span>
                     </div>
-                </div>
+                </button>
             </div>
         </div>
     </section>
+
+    <!-- Gallery Lightbox -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visualizador de fotos" hidden>
+        <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
+        <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Fechar visualizador">
+            <i class="fas fa-times" aria-hidden="true"></i>
+        </button>
+        <button type="button" class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Foto anterior">
+            <i class="fas fa-chevron-left" aria-hidden="true"></i>
+        </button>
+        <button type="button" class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Próxima foto">
+            <i class="fas fa-chevron-right" aria-hidden="true"></i>
+        </button>
+        <div class="lightbox-content">
+            <img id="lightboxImage" src="" alt="">
+            <p class="lightbox-caption" id="lightboxCaption"></p>
+        </div>
+    </div>
+
+    <!-- Demo Video Section -->
+    <section id="video" class="video-showcase">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Veja o CMP Market por dentro</h2>
+                <p class="section-subtitle">Um tour rápido pelo espaço e pelos produtos disponíveis</p>
+            </div>
+            <button type="button" class="video-thumb" id="videoThumbBtn" aria-label="Assistir vídeo de demonstração do CMP Market">
+                <img src="images/demo-video-poster.jpg" alt="Prévia do vídeo de demonstração do CMP Market" width="480" height="854" loading="lazy">
+                <span class="video-play-icon" aria-hidden="true"><i class="fas fa-play"></i></span>
+            </button>
+        </div>
+    </section>
+
+    <!-- Demo Video Modal -->
+    <div class="video-modal" id="videoModal" role="dialog" aria-modal="true" aria-label="Vídeo de demonstração do CMP Market" hidden>
+        <div class="video-modal-backdrop" id="videoModalBackdrop"></div>
+        <div class="video-modal-content">
+            <button type="button" class="video-modal-close" id="videoModalClose" aria-label="Fechar vídeo">
+                <i class="fas fa-times" aria-hidden="true"></i>
+            </button>
+            <video id="videoModalPlayer" controls playsinline poster="images/demo-video-poster.jpg">
+                <source data-src="images/demo-video.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
 
     <!-- CTA Section -->
     <section class="cta">
@@ -333,7 +447,7 @@
             <p>Transforme a experiência de compra dos moradores com tecnologia, praticidade e inovação.</p>
             <a href="#contact" class="btn btn-cta">
                 <span>Quero no meu condomínio</span>
-                <i class="fas fa-paper-plane"></i>
+                <i class="fas fa-paper-plane" aria-hidden="true"></i>
             </a>
         </div>
     </section>
@@ -352,14 +466,14 @@
                     
                     <div class="contact-methods">
                         <a href="mailto:contato@cmpmarket.com.br" class="contact-method">
-                            <i class="fas fa-envelope"></i>
+                            <i class="fas fa-envelope" aria-hidden="true"></i>
                             <div>
                                 <h4>Email</h4>
                                 <p>contato@cmpmarket.com.br</p>
                             </div>
                         </a>
-                        <a href="https://wa.me/5547991663273" target="_blank" class="contact-method">
-                            <i class="fab fa-whatsapp"></i>
+                        <a href="https://wa.me/5547991663273" target="_blank" rel="noopener noreferrer" class="contact-method">
+                            <i class="fab fa-whatsapp" aria-hidden="true"></i>
                             <div>
                                 <h4>WhatsApp</h4>
                                 <p>+55 (47) 99166-3273</p>
@@ -370,9 +484,9 @@
                     <div class="social-media">
                         <h4>Redes Sociais</h4>
                         <div class="social-icons">
-                            <a href="https://www.instagram.com/cmpmarket_oficial/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://www.instagram.com/cmpmarket_oficial/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
                         </div>
                     </div>
                 </div>
@@ -396,7 +510,7 @@
                     </div>
                     <button type="submit" class="btn btn-submit">
                         <span>Enviar Mensagem</span>
-                        <i class="fas fa-paper-plane"></i>
+                        <i class="fas fa-paper-plane" aria-hidden="true"></i>
                     </button>
                 </form>
             </div>
@@ -408,7 +522,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <img src="images/logo.webp" alt="CMP Market Logo">
+                    <img src="images/logo-footer.png" alt="CMP Market Logo" width="249" height="180" loading="lazy">
                     <h3>CMP Market</h3>
                     <p>Inovação, tecnologia e conveniência para o seu condomínio.</p>
                 </div>
@@ -431,9 +545,9 @@
                 <div class="footer-links">
                     <h4>Siga-nos</h4>
                     <div class="footer-social">
-                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/cmpmarket_oficial/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
                     </div>
                 </div>
             </div>
@@ -444,8 +558,8 @@
     </footer>
 
     <!-- WhatsApp Floating Button -->
-    <a href="https://wa.me/5547991663273" target="_blank" class="whatsapp-button" aria-label="Fale conosco no WhatsApp" title="Fale conosco">
-        <i class="fab fa-whatsapp"></i>
+    <a href="https://wa.me/5547991663273" target="_blank" rel="noopener noreferrer" class="whatsapp-button" aria-label="Fale conosco no WhatsApp" title="Fale conosco">
+        <i class="fab fa-whatsapp" aria-hidden="true"></i>
         <span class="whatsapp-tooltip">Fale conosco</span>
     </a>
 

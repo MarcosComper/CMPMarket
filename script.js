@@ -159,7 +159,7 @@ contactForm.addEventListener('submit', (e) => {
     
 if (isValid) {
     // Número do seu WhatsApp (com código do país + DDD, sem espaços)
-    const seuNumero = "5547999104588";
+    const seuNumero = "5547991663273";
     
     // Monta a mensagem formatada para o WhatsApp
     const texto = `Olá! Meu nome é *${name}*.%0A%0A` +
@@ -369,7 +369,9 @@ activeLinkStyles.textContent = `
 `;
 document.head.appendChild(activeLinkStyles);
 
-window.addEventListener('scroll', highlightActiveSection);
+// Note: the scroll listener for highlightActiveSection is registered further
+// down as a debounced handler (optimizedScrollHandler) to avoid running the
+// same expensive DOM work twice per scroll event.
 
 // ===================================
 // Image Lazy Loading Enhancement
@@ -545,8 +547,14 @@ handleParallax();
 const heroVideo = document.querySelector('.hero-video');
 const heroFallback = document.querySelector('.hero-fallback');
 
-// Check if video loaded successfully
-if (heroVideo) {
+// Only download/play the hero video on wider screens. On mobile the video
+// stays hidden (see CSS) and the poster image is used instead, so we skip
+// the download entirely to save mobile data.
+const isWideScreen = window.matchMedia('(min-width: 769px)').matches;
+
+if (heroVideo && isWideScreen) {
+    const heroSource = heroVideo.querySelector('source[data-src]');
+
     heroVideo.addEventListener('error', () => {
         console.warn('Video failed to load, using fallback background');
         heroVideo.style.display = 'none';
@@ -554,13 +562,18 @@ if (heroVideo) {
             heroFallback.style.display = 'block';
         }
     });
-    
-    // Ensure video plays on load
+
+    // Ensure video plays once it has data
     heroVideo.addEventListener('loadeddata', () => {
         heroVideo.play().catch(err => {
             console.warn('Video autoplay prevented:', err);
         });
     });
+
+    if (heroSource) {
+        heroSource.src = heroSource.dataset.src;
+        heroVideo.load();
+    }
 }
 
 // ===================================
@@ -597,6 +610,122 @@ productCards.forEach(card => {
     card.addEventListener('mouseleave', () => {
         card.style.transform = 'translateY(0) scale(1)';
     });
+});
+
+// ===================================
+// Gallery Lightbox
+// ===================================
+const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
+const lightbox = document.getElementById('lightbox');
+const lightboxImage = document.getElementById('lightboxImage');
+const lightboxCaption = document.getElementById('lightboxCaption');
+const lightboxClose = document.getElementById('lightboxClose');
+const lightboxBackdrop = document.getElementById('lightboxBackdrop');
+const lightboxPrev = document.getElementById('lightboxPrev');
+const lightboxNext = document.getElementById('lightboxNext');
+
+let currentGalleryIndex = 0;
+
+function updateLightboxImage() {
+    if (!galleryItems.length) return;
+    const item = galleryItems[currentGalleryIndex];
+    const img = item.querySelector('img');
+    const caption = item.querySelector('.gallery-overlay h4');
+    lightboxImage.src = img.src;
+    lightboxImage.alt = img.alt;
+    lightboxCaption.textContent = caption ? caption.textContent : '';
+}
+
+function openLightbox(index) {
+    if (!lightbox) return;
+    currentGalleryIndex = index;
+    updateLightboxImage();
+    lightbox.hidden = false;
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+    if (!lightbox) return;
+    lightbox.hidden = true;
+    document.body.style.overflow = '';
+}
+
+function showPrevImage() {
+    currentGalleryIndex = (currentGalleryIndex - 1 + galleryItems.length) % galleryItems.length;
+    updateLightboxImage();
+}
+
+function showNextImage() {
+    currentGalleryIndex = (currentGalleryIndex + 1) % galleryItems.length;
+    updateLightboxImage();
+}
+
+galleryItems.forEach((item, index) => {
+    item.addEventListener('click', () => openLightbox(index));
+});
+
+if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+if (lightboxBackdrop) lightboxBackdrop.addEventListener('click', closeLightbox);
+if (lightboxPrev) lightboxPrev.addEventListener('click', showPrevImage);
+if (lightboxNext) lightboxNext.addEventListener('click', showNextImage);
+
+document.addEventListener('keydown', (e) => {
+    if (!lightbox || lightbox.hidden) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') showPrevImage();
+    if (e.key === 'ArrowRight') showNextImage();
+});
+
+// ===================================
+// Demo Video Modal
+// ===================================
+const videoThumbBtn = document.getElementById('videoThumbBtn');
+const videoModal = document.getElementById('videoModal');
+const videoModalBackdrop = document.getElementById('videoModalBackdrop');
+const videoModalClose = document.getElementById('videoModalClose');
+const videoModalPlayer = document.getElementById('videoModalPlayer');
+
+function openVideoModal() {
+    if (!videoModal || !videoModalPlayer) return;
+
+    // Only load the video file the first time the modal is opened
+    const source = videoModalPlayer.querySelector('source[data-src]');
+    if (source) {
+        source.src = source.dataset.src;
+        delete source.dataset.src;
+        videoModalPlayer.load();
+    }
+
+    videoModal.hidden = false;
+    document.body.style.overflow = 'hidden';
+    videoModalPlayer.play().catch(() => {
+        // Autoplay with sound may be blocked; the user can press play manually.
+    });
+}
+
+function closeVideoModal() {
+    if (!videoModal || !videoModalPlayer) return;
+    videoModalPlayer.pause();
+    videoModal.hidden = true;
+    document.body.style.overflow = '';
+}
+
+if (videoThumbBtn) {
+    videoThumbBtn.addEventListener('click', openVideoModal);
+}
+
+if (videoModalClose) {
+    videoModalClose.addEventListener('click', closeVideoModal);
+}
+
+if (videoModalBackdrop) {
+    videoModalBackdrop.addEventListener('click', closeVideoModal);
+}
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && videoModal && !videoModal.hidden) {
+        closeVideoModal();
+    }
 });
 
 // ===================================

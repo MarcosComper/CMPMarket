@@ -153,7 +153,7 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
 
 function animateCounter(el) {
     const target = parseInt(el.dataset.target, 10);
-    const duration = 1800;
+    const duration = 3500;
     const start = performance.now();
     function tick(now) {
         const progress = Math.min((now - start) / duration, 1);

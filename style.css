@@ -632,83 +632,116 @@ body {
    =================================== */
 /* Numbers Section */
 .numbers {
-    padding: 80px 0;
-    background: #F4F7FA;
+    padding: 70px 0 80px;
+    background: linear-gradient(120deg, var(--color-dark-blue) 0%, var(--color-navy) 55%, var(--color-tech-green) 130%);
+    position: relative;
+    overflow: hidden;
+}
+
+.numbers::before {
+    content: '';
+    position: absolute;
+    width: 520px;
+    height: 520px;
+    right: -160px;
+    top: -220px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 255, 136, 0.25), transparent 65%);
+    pointer-events: none;
+}
+
+.numbers-title {
+    position: relative;
+    font-family: var(--font-secondary);
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--color-white);
+    margin: 0 0 30px;
 }
 
 .numbers-grid {
+    position: relative;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
+    gap: 24px;
 }
 
 .number-card {
     position: relative;
-    text-align: center;
-    padding: 40px 25px 35px;
-    border-radius: 20px;
-    background: linear-gradient(145deg, var(--color-dark-blue) 0%, var(--color-navy) 100%);
-    color: var(--color-white);
-    box-shadow: 0 20px 50px rgba(10, 37, 64, 0.25);
+    text-align: left;
+    padding: 28px 30px 30px;
+    border-radius: 22px;
+    background: var(--color-white);
+    color: var(--color-dark-blue);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
     overflow: hidden;
-    transition: var(--transition-smooth);
-}
-
-.number-card::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--color-tech-green), var(--color-neon-green));
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
 }
 
 .number-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 26px 60px rgba(10, 37, 64, 0.35);
+    box-shadow: 0 26px 55px rgba(0, 0, 0, 0.28);
 }
 
-.number-card i {
-    font-size: 2rem;
-    color: var(--color-neon-green);
-    margin-bottom: 12px;
+.number-icon {
+    display: block;
+    font-size: 2.3rem;
+    color: var(--color-tech-green);
+    margin-bottom: 22px;
 }
 
 .number-value {
     font-family: var(--font-secondary);
-    font-size: 4rem;
+    font-size: 2.6rem;
     font-weight: 800;
     line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--color-dark-blue);
     font-variant-numeric: tabular-nums;
 }
 
 .number-suffix {
-    font-size: 2.5rem;
-    color: var(--color-neon-green);
-    margin: 0 2px;
+    color: var(--color-dark-blue);
 }
 
 .number-label {
-    margin: 12px 0 0;
-    font-size: 1.05rem;
+    margin: 10px 0 0;
+    font-size: 1rem;
     font-weight: 500;
-    color: rgba(255, 255, 255, 0.85);
+    color: #4A5B70;
 }
 
 @media (max-width: 768px) {
     .numbers {
-        padding: 50px 0;
+        padding: 50px 0 55px;
+    }
+    .numbers-title {
+        font-size: 1.7rem;
+        margin-bottom: 22px;
     }
     .numbers-grid {
         grid-template-columns: 1fr;
-        gap: 18px;
+        gap: 14px;
     }
     .number-card {
-        padding: 28px 20px;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        column-gap: 18px;
+        align-items: center;
+        padding: 20px 22px;
+    }
+    .number-icon {
+        grid-row: span 2;
+        margin: 0;
+        font-size: 2rem;
+        width: 2.4rem;
+        text-align: center;
     }
     .number-value {
-        font-size: 3.2rem;
+        font-size: 2.1rem;
+    }
+    .number-label {
+        margin-top: 4px;
     }
 }
 
@@ -1983,4 +2016,204 @@ body {
 .visible {
     opacity: 1 !important;
     transform: translateY(0) !important;
+}
+
+/* ===================================
+   Efeitos visuais (revelar ao rolar, brilho, spotlight)
+   =================================== */
+
+/* Barra de progresso de leitura */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    transform-origin: 0 50%;
+    transform: scaleX(0);
+    background: linear-gradient(90deg, var(--color-tech-green), var(--color-neon-green));
+    box-shadow: 0 0 12px rgba(0, 255, 136, 0.7);
+    z-index: 10002;
+    pointer-events: none;
+}
+
+/* Elementos aparecem suavemente ao rolar */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    filter: blur(6px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                filter 0.8s ease;
+    transition-delay: var(--reveal-delay, 0s);
+}
+
+.reveal.reveal-left { transform: translateX(-50px); }
+.reveal.reveal-right { transform: translateX(50px); }
+.reveal.reveal-zoom { transform: scale(0.92); }
+
+.reveal.is-revealed {
+    opacity: 1;
+    transform: none;
+    filter: none;
+}
+
+/* Sublinhado dos títulos cresce ao aparecer */
+.section-header.reveal .section-title::after {
+    width: 0;
+    transition: width 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.3s;
+}
+
+.section-header.reveal.is-revealed .section-title::after {
+    width: 60px;
+}
+
+/* "24h" do topo com brilho animado */
+.hero-subtitle .highlight {
+    background: linear-gradient(90deg, var(--color-neon-green) 0%, #b6ffd9 50%, var(--color-neon-green) 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmerText 3.5s linear infinite;
+    text-shadow: none;
+}
+
+@keyframes shimmerText {
+    to { background-position: -200% center; }
+}
+
+/* Botões: faixa de brilho passando ao passar o mouse */
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+    transform: skewX(-20deg);
+    pointer-events: none;
+}
+
+.btn:hover::after {
+    animation: btnShine 0.85s ease;
+}
+
+@keyframes btnShine {
+    to { left: 130%; }
+}
+
+/* Cards: luz que segue o mouse */
+.step-card,
+.benefit-card,
+.product-card,
+.number-card {
+    --mx: 50%;
+    --my: 50%;
+}
+
+.step-card::after,
+.benefit-card::after,
+.product-card::after,
+.number-card .card-spotlight {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(360px circle at var(--mx) var(--my), rgba(0, 255, 136, 0.18), transparent 45%);
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+}
+
+.step-card:hover::after,
+.benefit-card:hover::after,
+.product-card:hover::after,
+.number-card:hover .card-spotlight {
+    opacity: 1;
+}
+
+/* Depois da animação de entrada, libera o efeito de hover dos cards */
+.step-card.entered,
+.benefit-card.entered,
+.product-card.entered,
+.gallery-item.entered {
+    animation: none;
+    opacity: 1;
+}
+
+.step-card.entered:not(:hover),
+.benefit-card.entered:not(:hover),
+.product-card.entered:not(:hover),
+.gallery-item.entered:not(:hover) {
+    transform: none;
+}
+
+.step-card,
+.benefit-card,
+.product-card {
+    position: relative;
+}
+
+.number-card .counter.counter-done {
+    animation: counterPop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: inline-block;
+}
+
+@keyframes counterPop {
+    50% { transform: scale(1.12); color: var(--color-tech-green); }
+}
+
+/* Vídeos: brilho no hover e botão pulsando */
+.video-thumb {
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
+}
+
+.video-thumb:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 28px 60px rgba(10, 37, 64, 0.35), 0 0 0 3px rgba(0, 255, 136, 0.5);
+}
+
+.video-play-icon::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px solid rgba(0, 255, 136, 0.8);
+    animation: playRing 2s ease-out infinite;
+}
+
+@keyframes playRing {
+    from { transform: scale(1); opacity: 0.9; }
+    to { transform: scale(1.7); opacity: 0; }
+}
+
+/* Galeria: brilho verde na borda ao passar o mouse */
+.gallery-item {
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
+}
+
+.gallery-item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 22px 50px rgba(10, 37, 64, 0.3), 0 0 0 3px rgba(0, 255, 136, 0.45);
+}
+
+/* Acessibilidade: quem prefere menos movimento não vê animações */
+@media (prefers-reduced-motion: reduce) {
+    .reveal,
+    .reveal.reveal-left,
+    .reveal.reveal-right,
+    .reveal.reveal-zoom {
+        opacity: 1;
+        transform: none;
+        filter: none;
+        transition: none;
+    }
+    .section-header.reveal .section-title::after { width: 60px; }
+    .hero-subtitle .highlight,
+    .video-play-icon::before,
+    .btn:hover::after { animation: none; }
+    .scroll-progress { display: none; }
 }

@@ -160,6 +160,7 @@ function animateCounter(el) {
         const eased = 1 - Math.pow(1 - progress, 3);
         el.textContent = Math.round(target * eased).toLocaleString('pt-BR');
         if (progress < 1) requestAnimationFrame(tick);
+        else el.classList.add('counter-done');
     }
     requestAnimationFrame(tick);
 }
@@ -807,3 +808,95 @@ if (window.location.hostname === 'localhost' || window.location.hostname === '12
     console.log('✨ Parallax scrolling ativado');
     console.log('🎥 Vídeo hero carregado');
 }
+
+// ===================================
+// Efeitos visuais
+// ===================================
+(function () {
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+    // Libera o hover dos cards depois que a animação de entrada termina
+    document.querySelectorAll('.step-card, .benefit-card, .product-card, .gallery-item').forEach((el) => {
+        el.addEventListener('animationend', () => el.classList.add('entered'), { once: true });
+    });
+
+    // Barra de progresso de leitura no topo
+    if (!prefersReduced) {
+        const bar = document.createElement('div');
+        bar.className = 'scroll-progress';
+        bar.setAttribute('aria-hidden', 'true');
+        document.body.appendChild(bar);
+        let ticking = false;
+        const update = () => {
+            const max = document.documentElement.scrollHeight - window.innerHeight;
+            bar.style.transform = `scaleX(${max > 0 ? window.scrollY / max : 0})`;
+            ticking = false;
+        };
+        window.addEventListener('scroll', () => {
+            if (!ticking) { requestAnimationFrame(update); ticking = true; }
+        }, { passive: true });
+        update();
+    }
+
+    // Elementos aparecem suavemente ao rolar a página
+    if (!prefersReduced && 'IntersectionObserver' in window) {
+        const groups = [
+            ['.section-header', ''],
+            ['.about-text', 'reveal-left'],
+            ['.about-image', 'reveal-right'],
+            ['.number-card', 'reveal-zoom', 0.12],
+            ['.video-thumb', '', 0.12],
+            ['.cta-content', 'reveal-zoom'],
+            ['.contact-info', 'reveal-left'],
+            ['.contact-form', 'reveal-right'],
+            ['.footer-content > *', '', 0.1]
+        ];
+        const revealObserver = new IntersectionObserver((entries, obs) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-revealed');
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+        groups.forEach(([selector, extra, stagger]) => {
+            document.querySelectorAll(selector).forEach((el, i) => {
+                el.classList.add('reveal');
+                if (extra) el.classList.add(extra);
+                if (stagger) el.style.setProperty('--reveal-delay', `${(i % 4) * stagger}s`);
+                revealObserver.observe(el);
+            });
+        });
+    }
+
+    // Luz que segue o mouse nos cards + inclinação 3D nos cards de números
+    if (finePointer && !prefersReduced) {
+        document.querySelectorAll('.number-card').forEach((card) => {
+            const spot = document.createElement('span');
+            spot.className = 'card-spotlight';
+            spot.setAttribute('aria-hidden', 'true');
+            card.appendChild(spot);
+        });
+
+        document.querySelectorAll('.step-card, .benefit-card, .product-card, .number-card').forEach((card) => {
+            const isNumber = card.classList.contains('number-card');
+            card.addEventListener('mousemove', (e) => {
+                const r = card.getBoundingClientRect();
+                const x = e.clientX - r.left;
+                const y = e.clientY - r.top;
+                card.style.setProperty('--mx', `${x}px`);
+                card.style.setProperty('--my', `${y}px`);
+                if (isNumber) {
+                    const rx = ((y / r.height) - 0.5) * -10;
+                    const ry = ((x / r.width) - 0.5) * 10;
+                    card.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-6px)`;
+                }
+            });
+            if (isNumber) {
+                card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+            }
+        });
+    }
+})();

@@ -2647,3 +2647,145 @@ body {
 .hero-split .hero-title {
     transform: none !important;
 }
+
+/* Corrige o texto dos quadradinhos do Sobre (estava branco sobre fundo claro) */
+.stat-item p {
+    color: var(--color-navy);
+}
+
+.stat-item:hover p {
+    color: var(--color-white);
+}
+
+/* ===================================
+   Celular: layout mais compacto
+   =================================== */
+@media (max-width: 768px) {
+    .section-header {
+        margin-bottom: 32px;
+    }
+
+    /* Sobre: quadradinhos lado a lado */
+    .about-stats {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-top: 26px;
+    }
+    .stat-item {
+        padding: 14px 6px;
+    }
+    .stat-item i {
+        font-size: 1.5rem;
+        margin-bottom: 6px;
+    }
+    .stat-item h4 {
+        font-size: 1.3rem;
+    }
+    .stat-item p {
+        font-size: 0.72rem;
+    }
+
+    /* Como Funciona e Benefícios: ícone ao lado do texto */
+    .steps-grid,
+    .benefits-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    .step-card,
+    .benefit-card {
+        display: grid;
+        grid-template-columns: 52px 1fr;
+        column-gap: 16px;
+        align-items: start;
+        text-align: left;
+        padding: 18px 18px;
+        border-radius: 16px;
+    }
+    .step-icon,
+    .benefit-icon {
+        grid-row: 1 / span 2;
+        width: 52px;
+        height: 52px;
+        margin: 0;
+        font-size: 1.3rem;
+    }
+    .step-card h3,
+    .benefit-card h3 {
+        font-size: 1.1rem;
+        margin: 2px 0 4px;
+        padding-right: 34px;
+    }
+    .step-card p,
+    .benefit-card p {
+        grid-column: 2;
+        font-size: 0.88rem;
+        line-height: 1.5;
+        margin: 0;
+    }
+    .step-number {
+        top: 12px;
+        right: 14px;
+        font-size: 1.7rem;
+    }
+
+    /* Produtos: 2 colunas */
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    .product-card {
+        padding: 18px 12px 14px;
+        border-radius: 16px;
+    }
+    .product-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.35rem;
+        margin-bottom: 10px;
+    }
+    .product-card h3 {
+        font-size: 1rem;
+        margin-bottom: 8px;
+    }
+    .product-list li {
+        padding: 3px 0;
+        font-size: 0.8rem;
+        gap: 6px;
+    }
+
+    /* Galeria: 2 colunas */
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    .gallery-item {
+        border-radius: 12px;
+    }
+    .gallery-overlay {
+        padding: 18px 10px 10px;
+    }
+    .gallery-overlay h4 {
+        font-size: 0.85rem;
+    }
+    .gallery-zoom-icon {
+        width: 30px;
+        height: 30px;
+        top: -36px;
+        right: 8px;
+        font-size: 0.8rem;
+    }
+
+    /* Foto do Sobre mais baixa */
+    .about-image {
+        aspect-ratio: 4 / 3;
+    }
+
+    /* Selos do topo menores */
+    .hero-chips {
+        gap: 8px;
+    }
+    .hero-chips li {
+        padding: 7px 13px;
+        font-size: 0.82rem;
+    }
+}

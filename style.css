@@ -2655,7 +2655,7 @@ body {
     html,
     body,
     body * {
-        cursor: url('images/cursor-carrinho.svg') 3 4, url('images/cursor-carrinho.png') 3 4, auto !important;
+        cursor: url('images/cursor-carrinho.svg') 2 2, url('images/cursor-carrinho.png') 2 2, auto !important;
     }
 
     a,
@@ -2676,7 +2676,7 @@ body {
     label,
     select,
     summary {
-        cursor: url('images/cursor-carrinho-hover.svg') 3 4, url('images/cursor-carrinho-hover.png') 3 4, pointer !important;
+        cursor: url('images/cursor-carrinho-hover.svg') 2 2, url('images/cursor-carrinho-hover.png') 2 2, pointer !important;
     }
 
     input:not([type="button"]):not([type="submit"]):not([type="checkbox"]):not([type="radio"]),
@@ -2687,6 +2687,6 @@ body {
 
     button:disabled,
     button:disabled * {
-        cursor: url('images/cursor-carrinho.svg') 3 4, url('images/cursor-carrinho.png') 3 4, not-allowed !important;
+        cursor: url('images/cursor-carrinho.svg') 2 2, url('images/cursor-carrinho.png') 2 2, not-allowed !important;
     }
 }

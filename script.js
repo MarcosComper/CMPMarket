@@ -970,3 +970,113 @@ if (window.location.hostname === 'localhost' || window.location.hostname === '12
     buildDots();
     update();
 })();
+
+// ===================================
+// Hero: mosaico de fotos e vídeos que se reorganiza
+// ===================================
+(function () {
+    const mosaic = document.querySelector('.hero-mosaic');
+    if (!mosaic) return;
+    const tiles = Array.from(mosaic.querySelectorAll('.mosaic-tile'));
+    const caption = mosaic.querySelector('.mosaic-caption');
+    const capLight = mosaic.querySelector('.mosaic-caption-light');
+    const capBold = mosaic.querySelector('.mosaic-caption-bold');
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const wide = window.matchMedia('(min-width: 769px)').matches;
+
+    // Cada layout: posição de cada foto/vídeo [x, y, largura, altura] em %
+    const layouts = [
+        {
+            tiles: {
+                0: [0, 0, 31.5, 46], 1: [0, 49, 31.5, 51],
+                2: [34.25, 0, 31.5, 30], 5: [34.25, 33, 31.5, 67],
+                4: [68.5, 0, 31.5, 62], 6: [68.5, 65, 31.5, 35]
+            }
+        },
+        {
+            tiles: { 3: [0, 0, 100, 56], 0: [0, 59, 31.5, 27], 5: [34.25, 59, 31.5, 27], 4: [68.5, 59, 31.5, 27] },
+            featured: 3,
+            caption: ['praticidade', '24h']
+        },
+        {
+            tiles: { 1: [0, 0, 48.5, 100], 2: [51.5, 0, 48.5, 48.5], 6: [51.5, 51.5, 48.5, 48.5] },
+            featured: 1
+        },
+        {
+            tiles: { 5: [0, 0, 41, 85], 0: [44, 0, 56, 41], 4: [44, 44, 56, 41] },
+            featured: 5,
+            caption: ['pague e', 'leve']
+        }
+    ];
+
+    const lastPos = {};
+
+    function apply(index) {
+        const layout = layouts[index];
+        tiles.forEach((tile) => {
+            const id = tile.dataset.tile;
+            const pos = layout.tiles[id];
+            const video = tile.querySelector('video');
+            if (pos) {
+                lastPos[id] = pos;
+                tile.style.setProperty('--x', pos[0] + '%');
+                tile.style.setProperty('--y', pos[1] + '%');
+                tile.style.setProperty('--w', pos[2] + '%');
+                tile.style.setProperty('--h', pos[3] + '%');
+                tile.classList.remove('is-hidden');
+                if (video && video.src) video.play().catch(() => {});
+            } else {
+                if (!lastPos[id]) {
+                    // Primeira vez escondido: nasce no centro, pequeno
+                    tile.style.setProperty('--x', '35%');
+                    tile.style.setProperty('--y', '35%');
+                    tile.style.setProperty('--w', '30%');
+                    tile.style.setProperty('--h', '30%');
+                }
+                tile.classList.add('is-hidden');
+                if (video) setTimeout(() => { if (tile.classList.contains('is-hidden')) video.pause(); }, 700);
+            }
+            tile.classList.toggle('is-featured', String(layout.featured) === id);
+        });
+        if (layout.caption) {
+            capLight.textContent = layout.caption[0];
+            capBold.textContent = layout.caption[1];
+            caption.classList.add('is-visible');
+        } else {
+            caption.classList.remove('is-visible');
+        }
+        mosaic.dataset.layout = index;
+    }
+
+    // Vídeos só carregam em telas maiores (economiza dados no celular)
+    if (wide && !reduce) {
+        tiles.forEach((tile) => {
+            const v = tile.querySelector('video[data-src]');
+            if (v) { v.src = v.dataset.src; v.removeAttribute('data-src'); }
+        });
+    }
+
+    apply(0);
+    if (reduce) return;
+
+    let current = 0;
+    let timer = null;
+    const start = () => {
+        if (timer) return;
+        timer = setInterval(() => {
+            current = (current + 1) % layouts.length;
+            apply(current);
+        }, 3800);
+    };
+    const stop = () => { clearInterval(timer); timer = null; };
+
+    // Pausa quando o topo não está na tela ou a aba está escondida
+    if ('IntersectionObserver' in window) {
+        new IntersectionObserver((entries) => {
+            entries.forEach((e) => (e.isIntersecting && !document.hidden ? start() : stop()));
+        }, { threshold: 0.2 }).observe(mosaic);
+    } else {
+        start();
+    }
+    document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+})();

@@ -2647,3 +2647,46 @@ body {
 .hero-split .hero-title {
     transform: none !important;
 }
+
+/* ===================================
+   Cursor de carrinho de compras (só em computador, com mouse)
+   =================================== */
+@media (hover: hover) and (pointer: fine) {
+    html,
+    body,
+    body * {
+        cursor: url('images/cursor-carrinho.svg') 3 4, url('images/cursor-carrinho.png') 3 4, auto !important;
+    }
+
+    a,
+    a *,
+    button,
+    button *,
+    [role="button"],
+    [role="tab"],
+    .btn,
+    .btn *,
+    .gallery-item,
+    .gallery-item *,
+    .video-thumb,
+    .video-thumb *,
+    .whatsapp-button,
+    .whatsapp-button *,
+    .testimonials-dots button,
+    label,
+    select,
+    summary {
+        cursor: url('images/cursor-carrinho-hover.svg') 3 4, url('images/cursor-carrinho-hover.png') 3 4, pointer !important;
+    }
+
+    input:not([type="button"]):not([type="submit"]):not([type="checkbox"]):not([type="radio"]),
+    textarea,
+    [contenteditable="true"] {
+        cursor: text !important;
+    }
+
+    button:disabled,
+    button:disabled * {
+        cursor: url('images/cursor-carrinho.svg') 3 4, url('images/cursor-carrinho.png') 3 4, not-allowed !important;
+    }
+}

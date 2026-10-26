@@ -432,12 +432,22 @@
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Veja o CMP Market por dentro</h2>
-                <p class="section-subtitle">Um tour rápido pelo espaço e pelos produtos disponíveis</p>
+                <p class="section-subtitle">Tours rápidos pelos nossos espaços e pelos produtos disponíveis</p>
             </div>
-            <button type="button" class="video-thumb" id="videoThumbBtn" aria-label="Assistir vídeo de demonstração do CMP Market">
-                <img src="images/demo-video-poster.jpg" alt="Prévia do vídeo de demonstração do CMP Market" width="480" height="854" loading="lazy">
-                <span class="video-play-icon" aria-hidden="true"><i class="fas fa-play"></i></span>
-            </button>
+            <div class="video-grid">
+                <button type="button" class="video-thumb" data-video="images/demo-video.mp4" data-poster="images/demo-video-poster.jpg" aria-label="Assistir vídeo de demonstração do CMP Market">
+                    <img src="images/demo-video-poster.jpg" alt="Prévia do vídeo de demonstração do CMP Market" width="480" height="854" loading="lazy">
+                    <span class="video-play-icon" aria-hidden="true"><i class="fas fa-play"></i></span>
+                </button>
+                <button type="button" class="video-thumb" data-video="images/tour-minimercado.mp4" data-poster="images/tour-minimercado-poster.jpg" aria-label="Assistir vídeo: tour pelo mini mercado 24h">
+                    <img src="images/tour-minimercado-poster.jpg" alt="Prévia do vídeo de tour pelo mini mercado 24h CMP Market" width="480" height="854" loading="lazy">
+                    <span class="video-play-icon" aria-hidden="true"><i class="fas fa-play"></i></span>
+                </button>
+                <button type="button" class="video-thumb" data-video="images/tour-produtos.mp4" data-poster="images/tour-produtos-poster.jpg" aria-label="Assistir vídeo: geladeiras e produtos do CMP Market">
+                    <img src="images/tour-produtos-poster.jpg" alt="Prévia do vídeo mostrando geladeiras e prateleiras do CMP Market" width="480" height="854" loading="lazy">
+                    <span class="video-play-icon" aria-hidden="true"><i class="fas fa-play"></i></span>
+                </button>
+            </div>
         </div>
     </section>
 
@@ -448,9 +458,7 @@
             <button type="button" class="video-modal-close" id="videoModalClose" aria-label="Fechar vídeo">
                 <i class="fas fa-times" aria-hidden="true"></i>
             </button>
-            <video id="videoModalPlayer" controls playsinline poster="images/demo-video-poster.jpg">
-                <source data-src="images/demo-video.mp4" type="video/mp4">
-            </video>
+            <video id="videoModalPlayer" controls playsinline preload="none"></video>
         </div>
     </div>
 

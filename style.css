@@ -1207,6 +1207,27 @@ body {
     text-align: center;
 }
 
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 300px));
+    justify-content: center;
+    gap: 30px;
+}
+
+@media (max-width: 900px) {
+    .video-grid {
+        grid-template-columns: repeat(3, 260px);
+        justify-content: start;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        padding: 10px 0 30px;
+        gap: 20px;
+    }
+    .video-grid .video-thumb {
+        scroll-snap-align: center;
+    }
+}
+
 .video-thumb {
     position: relative;
     width: 100%;

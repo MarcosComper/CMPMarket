@@ -679,20 +679,20 @@ document.addEventListener('keydown', (e) => {
 // ===================================
 // Demo Video Modal
 // ===================================
-const videoThumbBtn = document.getElementById('videoThumbBtn');
+const videoThumbBtns = document.querySelectorAll('.video-thumb[data-video]');
 const videoModal = document.getElementById('videoModal');
 const videoModalBackdrop = document.getElementById('videoModalBackdrop');
 const videoModalClose = document.getElementById('videoModalClose');
 const videoModalPlayer = document.getElementById('videoModalPlayer');
 
-function openVideoModal() {
-    if (!videoModal || !videoModalPlayer) return;
+function openVideoModal(videoSrc, posterSrc) {
+    if (!videoModal || !videoModalPlayer || !videoSrc) return;
 
-    // Only load the video file the first time the modal is opened
-    const source = videoModalPlayer.querySelector('source[data-src]');
-    if (source) {
-        source.src = source.dataset.src;
-        delete source.dataset.src;
+    // Only download a video when it is opened, and only swap it if it changed
+    if (videoModalPlayer.dataset.current !== videoSrc) {
+        videoModalPlayer.dataset.current = videoSrc;
+        if (posterSrc) videoModalPlayer.poster = posterSrc;
+        videoModalPlayer.src = videoSrc;
         videoModalPlayer.load();
     }
 
@@ -710,9 +710,9 @@ function closeVideoModal() {
     document.body.style.overflow = '';
 }
 
-if (videoThumbBtn) {
-    videoThumbBtn.addEventListener('click', openVideoModal);
-}
+videoThumbBtns.forEach((btn) => {
+    btn.addEventListener('click', () => openVideoModal(btn.dataset.video, btn.dataset.poster));
+});
 
 if (videoModalClose) {
     videoModalClose.addEventListener('click', closeVideoModal);

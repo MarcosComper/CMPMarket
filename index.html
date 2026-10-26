@@ -63,7 +63,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="style.css?v=20261026">
+    <link rel="stylesheet" href="style.css?v=20261026b">
+
+    <!-- Google Analytics 4: cole o ID de medição (G-XXXXXXXXXX) abaixo para ativar -->
+    <script>
+        window.CMP_GA_ID = '';
+        if (window.CMP_GA_ID) {
+            var gaScript = document.createElement('script');
+            gaScript.async = true;
+            gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + window.CMP_GA_ID;
+            document.head.appendChild(gaScript);
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = function () { dataLayer.push(arguments); };
+            gtag('js', new Date());
+            gtag('config', window.CMP_GA_ID);
+        }
+    </script>
 </head>
 <body>
     <!-- Navigation -->
@@ -163,6 +178,29 @@
                 </div>
                 <div class="about-image">
                     <img src="https://cmpmarket.com.br/images/gallery-orange-wall.jpg" alt="Unidade CMP Market instalada em ambiente de condomínio" width="900" height="1200" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Numbers Section -->
+    <section class="numbers" aria-label="CMP Market em números">
+        <div class="container">
+            <div class="numbers-grid">
+                <div class="number-card">
+                    <i class="fas fa-store" aria-hidden="true"></i>
+                    <div class="number-value"><span class="counter" data-target="10">10</span></div>
+                    <p class="number-label">Unidades CMP Market</p>
+                </div>
+                <div class="number-card">
+                    <i class="fas fa-location-dot" aria-hidden="true"></i>
+                    <div class="number-value"><span class="counter" data-target="3">3</span></div>
+                    <p class="number-label">Cidades em Santa Catarina</p>
+                </div>
+                <div class="number-card">
+                    <i class="fas fa-clock" aria-hidden="true"></i>
+                    <div class="number-value"><span class="counter" data-target="24">24</span><span class="number-suffix">h</span></div>
+                    <p class="number-label">Abertas todos os dias</p>
                 </div>
             </div>
         </div>
@@ -586,6 +624,6 @@
     </a>
 
     <!-- JavaScript -->
-    <script src="script.js?v=20261026"></script>
+    <script src="script.js?v=20261026b"></script>
 </body>
 </html>

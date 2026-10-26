@@ -114,6 +114,70 @@ animatedElements.forEach(element => {
 });
 
 // ===================================
+// Analytics (Google Analytics 4) - só envia dados se o ID estiver configurado no index.html
+// ===================================
+function trackEvent(name, params) {
+    if (typeof window.gtag === 'function') {
+        window.gtag('event', name, params || {});
+    }
+}
+
+function linkLocation(link) {
+    if (link.classList.contains('whatsapp-button')) return 'botao_flutuante';
+    if (link.closest('.hero')) return 'topo_do_site';
+    if (link.closest('#contact')) return 'secao_contato';
+    if (link.closest('.footer')) return 'rodape';
+    if (link.closest('.cta')) return 'chamada_condominio';
+    if (link.closest('.navbar')) return 'menu';
+    return 'outro';
+}
+
+document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href]');
+    if (!link) return;
+    const href = link.getAttribute('href');
+    if (href.includes('wa.me') || href.includes('whatsapp')) {
+        trackEvent('whatsapp_click', { local: linkLocation(link) });
+    } else if (href.includes('instagram.com')) {
+        trackEvent('instagram_click', { local: linkLocation(link) });
+    } else if (href.startsWith('mailto:')) {
+        trackEvent('email_click', { local: linkLocation(link) });
+    }
+});
+
+// ===================================
+// Animated Number Counters
+// ===================================
+const counters = document.querySelectorAll('.counter[data-target]');
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function animateCounter(el) {
+    const target = parseInt(el.dataset.target, 10);
+    const duration = 1800;
+    const start = performance.now();
+    function tick(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(target * eased);
+        if (progress < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+}
+
+if (counters.length && !reduceMotion && 'IntersectionObserver' in window) {
+    counters.forEach(el => { el.textContent = '0'; });
+    const counterObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateCounter(entry.target);
+                obs.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+    counters.forEach(el => counterObserver.observe(el));
+}
+
+// ===================================
 // Form Validation and Submission
 // ===================================
 const contactForm = document.getElementById('contactForm');
@@ -162,13 +226,15 @@ if (isValid) {
     const seuNumero = "5547991663273";
     
     // Monta a mensagem formatada para o WhatsApp
-    const texto = `Olá! Meu nome é *${name}*.%0A%0A` +
-                  `📧 *E-mail:* ${email}%0A` +
-                  `📱 *Telefone:* ${phone}%0A%0A` +
-                  `💬 *Mensagem:*%0A${message}`;
-    
-    // Cria o link do WhatsApp
-    const urlWhatsApp = `https://wa.me/${seuNumero}?text=${texto}`;
+    const texto = `Olá! Meu nome é *${name}*.\n\n` +
+                  `📧 *E-mail:* ${email}\n` +
+                  `📱 *Telefone:* ${phone}\n\n` +
+                  `💬 *Mensagem:*\n${message}`;
+
+    // Cria o link do WhatsApp (encodeURIComponent evita quebra com &, #, ? etc.)
+    const urlWhatsApp = `https://wa.me/${seuNumero}?text=${encodeURIComponent(texto)}`;
+
+    trackEvent('whatsapp_click', { local: 'formulario_contato' });
     
     // Abre em uma nova aba
     window.open(urlWhatsApp, '_blank');
@@ -711,7 +777,10 @@ function closeVideoModal() {
 }
 
 videoThumbBtns.forEach((btn) => {
-    btn.addEventListener('click', () => openVideoModal(btn.dataset.video, btn.dataset.poster));
+    btn.addEventListener('click', () => {
+        openVideoModal(btn.dataset.video, btn.dataset.poster);
+        trackEvent('video_play', { video: btn.dataset.video.split('/').pop() });
+    });
 });
 
 if (videoModalClose) {

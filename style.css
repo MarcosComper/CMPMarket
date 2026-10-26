@@ -686,7 +686,7 @@ body {
 .number-suffix {
     font-size: 2.5rem;
     color: var(--color-neon-green);
-    margin-left: 2px;
+    margin: 0 2px;
 }
 
 .number-label {

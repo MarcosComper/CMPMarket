@@ -158,7 +158,7 @@ function animateCounter(el) {
     function tick(now) {
         const progress = Math.min((now - start) / duration, 1);
         const eased = 1 - Math.pow(1 - progress, 3);
-        el.textContent = Math.round(target * eased);
+        el.textContent = Math.round(target * eased).toLocaleString('pt-BR');
         if (progress < 1) requestAnimationFrame(tick);
     }
     requestAnimationFrame(tick);

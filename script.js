@@ -847,6 +847,8 @@ if (window.location.hostname === 'localhost' || window.location.hostname === '12
             ['.about-image', 'reveal-right'],
             ['.number-card', 'reveal-zoom', 0.12],
             ['.video-thumb', '', 0.12],
+            ['.testimonials-rating', ''],
+            ['.testimonials-carousel', 'reveal-zoom'],
             ['.cta-content', 'reveal-zoom'],
             ['.contact-info', 'reveal-left'],
             ['.contact-form', 'reveal-right'],
@@ -899,4 +901,72 @@ if (window.location.hostname === 'localhost' || window.location.hostname === '12
             }
         });
     }
+})();
+
+// ===================================
+// Depoimentos (carrossel)
+// ===================================
+(function () {
+    const track = document.querySelector('.testimonials-track');
+    if (!track) return;
+    const cards = Array.from(track.querySelectorAll('.testimonial-card'));
+    const prev = document.querySelector('.testimonials-prev');
+    const next = document.querySelector('.testimonials-next');
+    const dotsWrap = document.querySelector('.testimonials-dots');
+    let dots = [];
+
+    const step = () => {
+        const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+        return cards[0].getBoundingClientRect().width + gap;
+    };
+    const perView = () => Math.max(1, Math.round(track.clientWidth / step()));
+    const pageCount = () => Math.max(1, cards.length - perView() + 1);
+    const currentIndex = () => Math.round(track.scrollLeft / step());
+
+    function buildDots() {
+        dotsWrap.innerHTML = '';
+        dots = [];
+        const pages = pageCount();
+        if (pages <= 1) return;
+        for (let i = 0; i < pages; i++) {
+            const b = document.createElement('button');
+            b.type = 'button';
+            b.setAttribute('role', 'tab');
+            b.setAttribute('aria-label', `Ir para o depoimento ${i + 1}`);
+            b.addEventListener('click', () => track.scrollTo({ left: i * step() }));
+            dotsWrap.appendChild(b);
+            dots.push(b);
+        }
+        update();
+    }
+
+    function update() {
+        const idx = Math.min(currentIndex(), pageCount() - 1);
+        dots.forEach((d, i) => d.setAttribute('aria-selected', i === idx ? 'true' : 'false'));
+        const maxScroll = track.scrollWidth - track.clientWidth - 8;
+        if (prev) prev.disabled = track.scrollLeft <= 8;
+        if (next) next.disabled = track.scrollLeft >= maxScroll;
+    }
+
+    if (prev) prev.addEventListener('click', () => track.scrollBy({ left: -step() }));
+    if (next) next.addEventListener('click', () => track.scrollBy({ left: step() }));
+    track.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') { e.preventDefault(); track.scrollBy({ left: step() }); }
+        if (e.key === 'ArrowLeft') { e.preventDefault(); track.scrollBy({ left: -step() }); }
+    });
+
+    let raf = null;
+    track.addEventListener('scroll', () => {
+        if (raf) return;
+        raf = requestAnimationFrame(() => { update(); raf = null; });
+    }, { passive: true });
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(buildDots, 150);
+    });
+
+    buildDots();
+    update();
 })();

@@ -1100,14 +1100,15 @@ if (window.location.hostname === 'localhost' || window.location.hostname === '12
         const tempo = form.querySelector('input[name="tempo"]:checked');
         const local = form.querySelector('input[name="local"]:checked');
         if (!tempo) return null;
-        let modelo = tempo.value === 'Quero operar no dia a dia' ? 'CMP Operador' : 'CMP Investidor';
-        let motivo = modelo === 'CMP Operador'
-            ? 'você acompanha a loja de perto e fica com uma margem maior por unidade.'
-            : 'a equipe CMP cuida da reposição e você acompanha tudo pelo painel.';
+        const perfis = {
+            'Seria meu primeiro negócio': 'Ótimo começo: o treinamento e o acompanhamento da CMP foram pensados para quem está estreando.',
+            'Já tenho um negócio': 'Sua experiência ajuda: a unidade CMP roda sem funcionários e cabe na rotina de quem já empreende.',
+            'Quero ter várias unidades': 'Com o painel no celular você acompanha várias lojas juntas, e cada novo ponto passa pelo mesmo estudo.'
+        };
         let extra = '';
-        if (local && local.value === 'Empresa ou escritório') extra = ' Unidades em empresas costumam ter movimento concentrado no horário comercial, e analisamos isso no estudo do ponto.';
-        if (local && local.value === 'Já tenho um ponto em mente') extra = ' Ótimo: o próximo passo é o estudo desse ponto.';
-        return { modelo, texto: `Seu perfil combina com o <strong>${modelo}</strong>: ${motivo}${extra}` };
+        if (local && local.value === 'Empresa ou escritório') extra = ' Em empresas o movimento se concentra no horário comercial, e isso entra no estudo do ponto.';
+        if (local && local.value === 'Já tenho um ponto em mente') extra = ' O próximo passo é o estudo desse ponto.';
+        return { perfil: tempo.value, texto: `<strong>${tempo.value}.</strong> ${perfis[tempo.value] || ''}${extra}` };
     }
 
     form.addEventListener('change', (e) => {
@@ -1149,13 +1150,12 @@ if (window.location.hostname === 'localhost' || window.location.hostname === '12
         const texto = `Olá! Tenho interesse na *franquia CMP Market*.\n\n` +
             `👤 *Nome:* ${nome.value.trim()}\n` +
             `📍 *Cidade:* ${cidade.value.trim()}\n` +
-            `⏱️ *Dedicação:* ${v('tempo')}\n` +
+            `🚀 *Momento:* ${v('tempo')}\n` +
             `🏢 *Local:* ${v('local')}\n` +
-            `📅 *Quando:* ${v('prazo')}\n` +
-            `💡 *Modelo sugerido:* ${s ? s.modelo : '-'}`;
+            `📅 *Quando:* ${v('prazo')}`;
 
         if (typeof trackEvent === 'function') {
-            trackEvent('franquia_lead', { modelo: s ? s.modelo : '', local: v('local'), prazo: v('prazo') });
+            trackEvent('franquia_lead', { momento: v('tempo'), local: v('local'), prazo: v('prazo') });
         }
         window.open(`https://wa.me/5547991663273?text=${encodeURIComponent(texto)}`, '_blank');
         if (typeof showNotification === 'function') showNotification('Abrindo o WhatsApp com suas respostas...', 'success');

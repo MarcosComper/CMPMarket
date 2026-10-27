@@ -3038,7 +3038,7 @@ body {
 .model-card h4 {
     font-family: var(--font-secondary);
     font-size: 1.7rem;
-    margin-bottom: 10px;
+    margin-bottom: 18px;
 }
 
 .model-desc {

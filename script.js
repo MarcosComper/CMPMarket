@@ -128,6 +128,7 @@ function linkLocation(link) {
     if (link.closest('#contact')) return 'secao_contato';
     if (link.closest('.footer')) return 'rodape';
     if (link.closest('.cta')) return 'chamada_condominio';
+    if (link.closest('.franchise')) return 'franquia';
     if (link.closest('.navbar')) return 'menu';
     return 'outro';
 }
@@ -849,6 +850,12 @@ if (window.location.hostname === 'localhost' || window.location.hostname === '12
             ['.video-thumb', '', 0.12],
             ['.testimonials-rating', ''],
             ['.testimonials-carousel', 'reveal-zoom'],
+            ['.franchise-hero', ''],
+            ['.franchise-compare', 'reveal-zoom'],
+            ['.pillar', '', 0.1],
+            ['.model-card', '', 0.12],
+            ['.steps-line li', '', 0.08],
+            ['.franchise-form-wrap', ''],
             ['.cta-content', 'reveal-zoom'],
             ['.contact-info', 'reveal-left'],
             ['.contact-form', 'reveal-right'],
@@ -1079,4 +1086,78 @@ if (window.location.hostname === 'localhost' || window.location.hostname === '12
         start();
     }
     document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+})();
+
+// ===================================
+// Franquia: quiz + envio para o WhatsApp
+// ===================================
+(function () {
+    const form = document.getElementById('franchiseForm');
+    if (!form) return;
+    const result = form.querySelector('.quiz-result');
+
+    function suggestion() {
+        const tempo = form.querySelector('input[name="tempo"]:checked');
+        const local = form.querySelector('input[name="local"]:checked');
+        if (!tempo) return null;
+        let modelo = tempo.value === 'Quero operar no dia a dia' ? 'CMP Operador' : 'CMP Investidor';
+        let motivo = modelo === 'CMP Operador'
+            ? 'você acompanha a loja de perto e fica com uma margem maior por unidade.'
+            : 'a equipe CMP cuida da reposição e você acompanha tudo pelo painel.';
+        let extra = '';
+        if (local && local.value === 'Empresa ou escritório') extra = ' Unidades em empresas costumam ter movimento concentrado no horário comercial, e analisamos isso no estudo do ponto.';
+        if (local && local.value === 'Já tenho um ponto em mente') extra = ' Ótimo: o próximo passo é o estudo desse ponto.';
+        return { modelo, texto: `Seu perfil combina com o <strong>${modelo}</strong>: ${motivo}${extra}` };
+    }
+
+    form.addEventListener('change', (e) => {
+        if (e.target.name === 'tempo' || e.target.name === 'local') {
+            const s = suggestion();
+            if (s) {
+                result.innerHTML = s.texto;
+                result.classList.add('has-result');
+            }
+        }
+        const fs = e.target.closest('fieldset');
+        if (fs) fs.classList.remove('field-error');
+        if (e.target.classList) e.target.classList.remove('field-error');
+    });
+
+    form.addEventListener('input', (e) => e.target.classList && e.target.classList.remove('field-error'));
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        let firstError = null;
+        ['tempo', 'local', 'prazo'].forEach((name) => {
+            const checked = form.querySelector(`input[name="${name}"]:checked`);
+            const fs = form.querySelector(`input[name="${name}"]`).closest('fieldset');
+            if (!checked) { fs.classList.add('field-error'); firstError = firstError || fs; }
+        });
+        const nome = form.querySelector('#fr-name');
+        const cidade = form.querySelector('#fr-city');
+        [nome, cidade].forEach((el) => {
+            if (el.value.trim().length < 2) { el.classList.add('field-error'); firstError = firstError || el; }
+        });
+        if (firstError) {
+            if (typeof showNotification === 'function') showNotification('Responda as 3 perguntas e preencha nome e cidade.', 'error');
+            firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            return;
+        }
+
+        const v = (n) => form.querySelector(`input[name="${n}"]:checked`).value;
+        const s = suggestion();
+        const texto = `Olá! Tenho interesse na *franquia CMP Market*.\n\n` +
+            `👤 *Nome:* ${nome.value.trim()}\n` +
+            `📍 *Cidade:* ${cidade.value.trim()}\n` +
+            `⏱️ *Dedicação:* ${v('tempo')}\n` +
+            `🏢 *Local:* ${v('local')}\n` +
+            `📅 *Quando:* ${v('prazo')}\n` +
+            `💡 *Modelo sugerido:* ${s ? s.modelo : '-'}`;
+
+        if (typeof trackEvent === 'function') {
+            trackEvent('franquia_lead', { modelo: s ? s.modelo : '', local: v('local'), prazo: v('prazo') });
+        }
+        window.open(`https://wa.me/5547991663273?text=${encodeURIComponent(texto)}`, '_blank');
+        if (typeof showNotification === 'function') showNotification('Abrindo o WhatsApp com suas respostas...', 'success');
+    });
 })();

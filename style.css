@@ -2789,3 +2789,639 @@ body {
         font-size: 0.82rem;
     }
 }
+
+/* ===================================
+   Franquia
+   =================================== */
+.nav-link.nav-franchise {
+    color: var(--color-tech-green);
+    font-weight: 700;
+}
+
+.franchise {
+    position: relative;
+    padding: 110px 0;
+    background:
+        radial-gradient(900px 500px at 85% -10%, rgba(0, 255, 136, 0.18), transparent 60%),
+        radial-gradient(700px 500px at -10% 110%, rgba(0, 214, 108, 0.14), transparent 60%),
+        linear-gradient(160deg, #071B30 0%, var(--color-dark-blue) 45%, #0E2F4F 100%);
+    color: var(--color-white);
+    overflow: hidden;
+}
+
+.franchise-hero {
+    max-width: 820px;
+    margin: 0 auto 60px;
+    text-align: center;
+}
+
+.franchise-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 50px;
+    background: rgba(0, 255, 136, 0.12);
+    border: 1px solid rgba(0, 255, 136, 0.35);
+    color: var(--color-neon-green);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+}
+
+.franchise-title {
+    font-family: var(--font-secondary);
+    font-size: 3.2rem;
+    line-height: 1.12;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.franchise-title span {
+    color: var(--color-neon-green);
+}
+
+.franchise-lead {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.82);
+    margin-bottom: 30px;
+}
+
+.franchise-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 22px;
+}
+
+.franchise-link {
+    color: var(--color-white);
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.85;
+    transition: var(--transition-smooth);
+}
+
+.franchise-link:hover {
+    opacity: 1;
+    color: var(--color-neon-green);
+}
+
+/* Comparação */
+.franchise-compare {
+    max-width: 960px;
+    margin: 0 auto 70px;
+    border-radius: 22px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.compare-row {
+    display: grid;
+    grid-template-columns: 0.7fr 1fr 1.2fr;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.compare-row:first-child {
+    border-top: none;
+}
+
+.compare-row > span {
+    padding: 18px 22px;
+    font-size: 0.98rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.compare-row > span[role="rowheader"] {
+    font-weight: 700;
+    color: var(--color-white);
+}
+
+.compare-row .compare-cmp {
+    background: rgba(0, 255, 136, 0.08);
+    color: var(--color-white);
+    font-weight: 500;
+}
+
+.compare-head > span {
+    font-family: var(--font-secondary);
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.75);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.compare-head .compare-cmp {
+    color: var(--color-neon-green);
+    background: rgba(0, 255, 136, 0.14);
+}
+
+.compare-row .fa-xmark {
+    color: #FF6B6B;
+}
+
+.compare-row .fa-check {
+    color: var(--color-neon-green);
+}
+
+/* Pilares */
+.franchise-pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    margin-bottom: 80px;
+}
+
+.pillar {
+    position: relative;
+    padding: 30px 28px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease, background 0.35s ease;
+}
+
+.pillar:hover {
+    transform: translateY(-6px);
+    border-color: rgba(0, 255, 136, 0.45);
+    background: rgba(0, 255, 136, 0.07);
+}
+
+.pillar-icon {
+    display: grid;
+    place-items: center;
+    width: 54px;
+    height: 54px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, var(--color-neon-green), var(--color-tech-green));
+    color: var(--color-dark-blue);
+    font-size: 1.35rem;
+    margin-bottom: 18px;
+    box-shadow: 0 10px 25px rgba(0, 255, 136, 0.25);
+}
+
+.pillar h3 {
+    font-family: var(--font-secondary);
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+}
+
+.pillar p {
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.6;
+    font-size: 0.97rem;
+}
+
+.franchise-subtitle {
+    font-family: var(--font-secondary);
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 34px;
+}
+
+/* Modelos */
+.franchise-models {
+    margin-bottom: 80px;
+}
+
+.models-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 420px));
+    justify-content: center;
+    gap: 26px;
+}
+
+.model-card {
+    position: relative;
+    padding: 34px 32px;
+    border-radius: 24px;
+    background: var(--color-white);
+    color: var(--color-dark-blue);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.model-featured {
+    outline: 3px solid var(--color-neon-green);
+    outline-offset: -3px;
+}
+
+.model-tag {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 50px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    background: rgba(10, 37, 64, 0.08);
+    color: var(--color-navy);
+    margin-bottom: 14px;
+}
+
+.model-featured .model-tag {
+    background: var(--color-neon-green);
+    color: var(--color-dark-blue);
+}
+
+.model-card h4 {
+    font-family: var(--font-secondary);
+    font-size: 1.7rem;
+    margin-bottom: 10px;
+}
+
+.model-desc {
+    color: #4A5B70;
+    line-height: 1.6;
+    margin-bottom: 18px;
+}
+
+.model-card ul {
+    list-style: none;
+    display: grid;
+    gap: 10px;
+}
+
+.model-card li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-weight: 500;
+}
+
+.model-card li i {
+    color: var(--color-tech-green);
+    margin-top: 4px;
+}
+
+.models-note {
+    max-width: 720px;
+    margin: 24px auto 0;
+    text-align: center;
+    font-size: 0.88rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.6;
+}
+
+/* Linha do tempo */
+.franchise-steps {
+    margin-bottom: 80px;
+}
+
+.steps-line {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 14px;
+    position: relative;
+    counter-reset: none;
+}
+
+.steps-line::before {
+    content: '';
+    position: absolute;
+    top: 24px;
+    left: 8%;
+    right: 8%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-neon-green), rgba(0, 255, 136, 0.15));
+}
+
+.steps-line li {
+    position: relative;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.steps-line li span {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--color-dark-blue);
+    border: 2px solid var(--color-neon-green);
+    color: var(--color-neon-green);
+    font-family: var(--font-secondary);
+    font-weight: 800;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 6px;
+}
+
+.steps-line li strong {
+    font-family: var(--font-secondary);
+    font-size: 1.02rem;
+}
+
+.steps-line li em {
+    font-style: normal;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 1.4;
+}
+
+/* Quiz + formulário */
+.franchise-form-wrap {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 40px;
+    align-items: start;
+    padding: 44px;
+    border-radius: 28px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    scroll-margin-top: 100px;
+}
+
+.franchise-form-intro h3 {
+    font-family: var(--font-secondary);
+    font-size: 2rem;
+    margin-bottom: 14px;
+}
+
+.franchise-form-intro p {
+    color: rgba(255, 255, 255, 0.78);
+    line-height: 1.7;
+}
+
+.franchise-form fieldset {
+    border: none;
+    margin: 0 0 22px;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.franchise-form legend {
+    font-weight: 700;
+    margin-bottom: 12px;
+    font-size: 1.02rem;
+}
+
+.quiz-option {
+    position: relative;
+    cursor: pointer;
+}
+
+.quiz-option input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.quiz-option span {
+    display: inline-block;
+    padding: 11px 16px;
+    border-radius: 12px;
+    border: 1.5px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.04);
+    font-size: 0.93rem;
+    transition: var(--transition-smooth);
+}
+
+.quiz-option:hover span {
+    border-color: rgba(0, 255, 136, 0.7);
+}
+
+.quiz-option input:checked + span {
+    background: var(--color-neon-green);
+    border-color: var(--color-neon-green);
+    color: var(--color-dark-blue);
+    font-weight: 700;
+}
+
+.quiz-option input:focus-visible + span {
+    outline: 3px solid var(--color-white);
+    outline-offset: 2px;
+}
+
+.quiz-result {
+    min-height: 0;
+    margin-bottom: 18px;
+}
+
+.quiz-result.has-result {
+    padding: 16px 18px;
+    border-radius: 14px;
+    background: rgba(0, 255, 136, 0.12);
+    border: 1px solid rgba(0, 255, 136, 0.4);
+    line-height: 1.6;
+}
+
+.quiz-result strong {
+    color: var(--color-neon-green);
+}
+
+.franchise-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.franchise-form .form-group {
+    margin-bottom: 18px;
+}
+
+.franchise-form .form-group label {
+    color: var(--color-white);
+}
+
+.franchise-form .form-group input {
+    border-color: transparent;
+}
+
+.btn-franchise {
+    width: 100%;
+    justify-content: center;
+}
+
+.franchise-form .field-error {
+    border-color: #FF6B6B !important;
+}
+
+.franchise-form fieldset.field-error legend {
+    color: #FF9B9B;
+}
+
+@media (max-width: 992px) {
+    .franchise-pillars {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .steps-line {
+        grid-template-columns: repeat(3, 1fr);
+        row-gap: 30px;
+    }
+    .steps-line::before {
+        display: none;
+    }
+    .franchise-form-wrap {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    .franchise {
+        padding: 70px 0;
+    }
+    .franchise-hero {
+        margin-bottom: 40px;
+    }
+    .franchise-title {
+        font-size: 2.1rem;
+    }
+    .franchise-lead {
+        font-size: 1rem;
+    }
+    .franchise-compare {
+        margin-bottom: 50px;
+    }
+    .compare-head {
+        display: none;
+    }
+    .compare-row {
+        grid-template-columns: 1fr;
+    }
+    .compare-row > span {
+        padding: 10px 16px;
+        font-size: 0.9rem;
+    }
+    .compare-row > span[role="rowheader"] {
+        padding-top: 16px;
+        padding-bottom: 4px;
+        text-transform: uppercase;
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        color: var(--color-neon-green);
+    }
+    .compare-row > span[role="cell"]:not(.compare-cmp) {
+        text-decoration: line-through;
+        text-decoration-color: rgba(255, 107, 107, 0.6);
+    }
+    .franchise-pillars {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-bottom: 55px;
+    }
+    .pillar {
+        display: grid;
+        grid-template-columns: 46px 1fr;
+        column-gap: 14px;
+        padding: 18px;
+        border-radius: 16px;
+    }
+    .pillar-icon {
+        grid-row: 1 / span 2;
+        width: 46px;
+        height: 46px;
+        border-radius: 12px;
+        font-size: 1.1rem;
+        margin: 0;
+    }
+    .pillar h3 {
+        font-size: 1.05rem;
+        margin-bottom: 4px;
+    }
+    .pillar p {
+        font-size: 0.88rem;
+    }
+    .franchise-subtitle {
+        font-size: 1.5rem;
+        margin-bottom: 22px;
+    }
+    .franchise-models,
+    .franchise-steps {
+        margin-bottom: 55px;
+    }
+    .models-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+    .model-card {
+        padding: 24px 22px;
+    }
+    .model-card h4 {
+        font-size: 1.4rem;
+    }
+    .steps-line {
+        grid-template-columns: 1fr 1fr;
+        gap: 22px 12px;
+    }
+    .franchise-form-wrap {
+        padding: 24px 18px;
+        border-radius: 20px;
+    }
+    .franchise-form-intro h3 {
+        font-size: 1.5rem;
+    }
+    .franchise-fields {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+    .quiz-option span {
+        padding: 9px 13px;
+        font-size: 0.86rem;
+    }
+}
+
+/* Menu: cabe em uma linha e destaca "Seja franqueado" */
+.nav-logo,
+.nav-link {
+    white-space: nowrap;
+}
+
+@media (min-width: 769px) {
+    .nav-menu {
+        gap: clamp(14px, 1.7vw, 30px);
+    }
+    .nav-link.nav-franchise {
+        padding: 8px 16px;
+        border-radius: 50px;
+        background: var(--color-dark-blue);
+        color: var(--color-neon-green);
+    }
+    .nav-link.nav-franchise:hover {
+        background: var(--color-navy);
+    }
+    .nav-link.nav-franchise::after {
+        display: none;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1439px) {
+    .nav-optional {
+        display: none;
+    }
+}
+
+.nav-container {
+    gap: 30px;
+}
+
+@media (min-width: 769px) and (max-width: 960px) {
+    .nav-optional-2 {
+        display: none;
+    }
+}
+
+@media (min-width: 1440px) {
+    .nav-container {
+        max-width: 1360px;
+    }
+}

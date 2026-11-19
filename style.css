@@ -1324,14 +1324,14 @@ body {
 
 .video-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 300px));
+    grid-template-columns: repeat(4, minmax(0, 260px));
     justify-content: center;
-    gap: 30px;
+    gap: 24px;
 }
 
 @media (max-width: 900px) {
     .video-grid {
-        grid-template-columns: repeat(3, 260px);
+        grid-template-columns: repeat(4, 260px);
         justify-content: start;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
